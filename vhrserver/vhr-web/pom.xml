@@ -10,12 +10,6 @@
     </parent>
 
     <artifactId>vhr-web</artifactId>
-    <!--    -->
-    <!--    <groupId>com.wuxinhua</groupId>-->
-    <!--    <artifactId>vhr-web</artifactId>-->
-    <!--    <version>0.0.1-SNAPSHOT</version>-->
-    <!--    <name>vhr-web</name>-->
-    <!--    <description>Demo project for Spring Boot</description>-->
 
     <dependencies>
         <dependency>
