@@ -28,4 +28,6 @@ public interface EmployeeMapper {
     Integer getMaxWorkId();
 
     Integer addEmployeeList(@Param("employees") List<Employee> employees);
+
+    Employee getEmployeeDetaliById(@Param("id") Integer id);
 }

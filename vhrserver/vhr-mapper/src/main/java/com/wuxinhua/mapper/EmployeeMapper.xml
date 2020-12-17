@@ -160,6 +160,31 @@
         from employee
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="getEmployeeDetaliById" resultMap="employeeAndOthers">
+        select
+        e.*,
+        n.id as nid,
+        n.`name` as nname,
+        pol.id as polid,
+        pol.name as polname,
+        d.id as did,
+        d.`name` as dname,
+        j.id as jid,
+        j.`name` as jname,
+        pos.id as posid,
+        pos.name as posname
+        FROM
+        employee e
+        LEFT JOIN nation n ON e.nationId = n.id
+        LEFT JOIN politicsstatus pol ON e.politicId = pol.id
+        LEFT JOIN department d on e.departmentId = d.id
+        LEFT JOIN joblevel j on e.jobLevelId = j.id
+        LEFT JOIN position pos on e.posId = pos.id
+        where e.id = #{id}
+
+
+
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee
     where id = #{id,jdbcType=INTEGER}
@@ -186,7 +211,8 @@
       #{beginContract,jdbcType=DATE}, #{endContract,jdbcType=DATE}, #{workAge,jdbcType=INTEGER}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.wuxinhua.model.Employee">
+    <insert id="insertSelective" parameterType="com.wuxinhua.model.Employee" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
         insert into employee
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

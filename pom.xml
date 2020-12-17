@@ -21,6 +21,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>vhrserver</module>
+        <module>emailserver</module>
     </modules>
 
 

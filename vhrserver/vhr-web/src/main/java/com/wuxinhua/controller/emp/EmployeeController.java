@@ -10,6 +10,7 @@ import com.wuxinhua.service.system.basic.PositionService;
 import com.wuxinhua.service.utils.POIUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -92,7 +93,7 @@ public class EmployeeController {
 
     @PostMapping("/")
     public RespBean addEmployee(@RequestBody Employee employee) {
-        if (1 == employeeService.addEmployee(employee)) {
+        if (employeeService.addEmployee(employee)) {
             return RespBean.ok("添加成功");
         }
         return RespBean.error("添加失败");
