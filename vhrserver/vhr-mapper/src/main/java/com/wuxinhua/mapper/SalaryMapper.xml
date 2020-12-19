@@ -205,4 +205,74 @@
       name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+    <resultMap id="salaryCfgMapper" type="com.wuxinhua.model.SalarySobCfg">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="workID" property="workID"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <association property="department" javaType="com.wuxinhua.model.Department">
+            <id column="did" property="id"/>
+            <result column="dname" property="name"/>
+        </association>
+        <association property="salary" javaType="com.wuxinhua.model.Salary">
+            <id column="sid" property="id"/>
+            <result column="sname" property="name"/>
+            <result column="sbasicSalary" property="basicSalary"/>
+            <result column="sbonus" property="bonus"/>
+            <result column="slunchSalary" property="lunchSalary"/>
+            <result column="strafficSalary" property="trafficSalary"/>
+            <result column="spensionBase" property="pensionBase"/>
+            <result column="spensionPer" property="pensionPer"/>
+            <result column="saccumulationFundBase" property="accumulationFundBase"/>
+            <result column="saccumulationFundPer" property="accumulationFundPer"/>
+            <result column="smedicalBase" property="medicalBase"/>
+            <result column="smedicalPer" property="medicalPer"/>
+        </association>
+    </resultMap>
+
+    <select id="getAllSalarySobCfgs" resultMap="salaryCfgMapper">
+            SELECT
+                e.id id,
+                e.name name,
+                e.workID workID,
+                e.email email,
+                e.phone phone,
+                d.id did,
+                d.name dname,
+                s.id sid,
+                s.name sname,
+                s.basicSalary sbasicSalary,
+                s.bonus  sbonus,
+                s.lunchSalary slunchSalary,
+                s.trafficSalary strafficSalary,
+                s.pensionBase spensionBase,
+                s.pensionPer spensionPer,
+                s.accumulationFundBase saccumulationFundBase,
+                s.accumulationFundPer saccumulationFundPer,
+                s.medicalBase smedicalBase,
+                s.medicalPer smedicalPer
+            FROM
+                employee e
+                LEFT JOIN empsalary es ON e.id = es.eid
+                LEFT JOIN salary s ON es.sid = s.id
+                LEFT JOIN department d ON e.departmentId = d.id
+            	order by e.id
+	            limit #{currentPage} , #{pageSize}
+
+    </select>
+
+    <select id="getSalarySobCfgListTotal" resultType="java.lang.Long">
+            SELECT
+                count(1)
+            FROM
+                employee e
+            LEFT JOIN empsalary es ON e.id = es.eid
+            LEFT JOIN salary s ON es.sid = s.id
+            LEFT JOIN department d ON e.departmentId = d.id
+            order by e.id
+    </select>
+
 </mapper>
