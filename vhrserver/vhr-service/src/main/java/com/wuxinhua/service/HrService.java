@@ -70,4 +70,8 @@ public class HrService implements UserDetailsService {
     public Integer deleteHrById(Integer id) {
         return hrMapper.deleteHrById(id);
     }
+
+    public List<Hr> getAllHrsWhitoutCurrentHr(Integer id) {
+        return hrMapper.getAllHrsWhitoutCurrentHr(id);
+    }
 }

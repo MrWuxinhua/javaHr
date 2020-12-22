@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface HrMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Hr record);
@@ -20,7 +21,11 @@ public interface HrMapper {
 
     Hr loadUserByUsername(String username);
 
-    List<Hr> getHrAll( @Param("keyWords") String keyWords , @Param("id") Integer id);
+    List<Hr> getHrAll(@Param("keyWords") String keyWords, @Param("id") Integer id);
 
     Integer deleteHrById(@Param("id") Integer id);
+
+
+    List<Hr> getAllHrsWhitoutCurrentHr(@Param("id") Integer id);
+
 }

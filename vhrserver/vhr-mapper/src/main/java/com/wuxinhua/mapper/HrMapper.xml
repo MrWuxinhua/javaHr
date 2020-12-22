@@ -27,7 +27,7 @@
     id, name, phone, telephone, address, enabled, username, password, userface, remark
   </sql>
 
-  <update id="deleteHrById">
+    <update id="deleteHrById">
       update hr set isdelete = true where id = #{id}
    </update>
 
@@ -83,6 +83,9 @@
             h.username = #{username}
         and
             h.isdelete = false
+    </select>
+    <select id="getAllHrsWhitoutCurrentHr" resultType="com.wuxinhua.model.Hr">
+        select * from hr where id != #{id}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from hr
